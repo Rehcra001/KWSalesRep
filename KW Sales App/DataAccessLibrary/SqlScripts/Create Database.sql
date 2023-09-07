@@ -166,6 +166,7 @@ CREATE TABLE dbo.Purchases
 	OrderID INT NOT NULL,
 	ProductID INT NOT NULL,
 	Quantity INT NOT NULL,
+	Price MONEY NOT NULL
 	CONSTRAINT PK_Purchases_OrderID_ProductID PRIMARY KEY(OrderID, ProductID),
 	CONSTRAINT FK_Purchases_Orders_OrderID FOREIGN KEY(OrderID) REFERENCES Orders(OrderID),
 	CONSTRAINT FK_Purchases_Products_ProductID FOREIGN KEY(ProductID) REFERENCES Products(ProductID)
