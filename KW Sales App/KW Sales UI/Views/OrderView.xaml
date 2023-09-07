@@ -5,8 +5,41 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:KW_Sales_UI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+             d:DesignHeight="550" d:DesignWidth="500"
+             Background="#272537"
+             Foreground="White"
+             FontSize="16">
+    
+    <StackPanel Orientation="Vertical">
+        <GroupBox Header="Order"
+                  Height="100"
+                  Margin="10, 5, 10, 5">
             
-    </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Customers"
+          Height="250"
+          Margin="10, 5, 10, 5">
+
+        </GroupBox>
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <GroupBox Header="Products"
+                      Height="150"
+                      Width="175"
+                      Margin="10, 5, 10, 5"
+                      HorizontalAlignment="Center">
+
+            </GroupBox>
+            
+            <GroupBox Header="Shopping Cart"
+                      Height="150"
+                      Width="275"
+                      Margin="10, 5, 10, 5"
+                      HorizontalAlignment="Right">
+
+            </GroupBox>
+        </StackPanel>
+        
+    </StackPanel>
 </UserControl>

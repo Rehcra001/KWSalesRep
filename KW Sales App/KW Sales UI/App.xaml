@@ -5,13 +5,21 @@
              xmlns:viewModel="clr-namespace:KW_Sales_UI.ViewModels"
              xmlns:view="clr-namespace:KW_Sales_UI.Views">
     <Application.Resources>
-        <DataTemplate DataType="{x:Type TypeName=viewModel:MainViewModel}">
-            <view:MainView/>
-        </DataTemplate>
+        <ResourceDictionary>
+            
+            <DataTemplate DataType="{x:Type viewModel:MainViewModel}">
+                <view:MainView/>
+            </DataTemplate>
 
-        <DataTemplate DataType="{x:Type TypeName=viewModel:OrderViewModel}">
-            <view:OrderView/>
-        </DataTemplate>
-        
+            <DataTemplate DataType="{x:Type viewModel:OrderViewModel}">
+                <view:OrderView/>
+            </DataTemplate>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/MenuButtonTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -5,24 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KW_Sales_UI.Views"
         mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
+        Title="MainView" Height="550" Width="600"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="#272537"
+        WindowStartupLocation="CenterScreen"
+        >
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0"
+              Background="#0f0f2d">
+        </Grid>
+        <StackPanel Grid.Column="0"
+                    Margin="0,30">
 
-        <Button Grid.Column="0"
-                Content="Orders"
-                Height="40"
-                VerticalAlignment="Top"
-                Margin="5"
-                FontSize="20"
-                Command="{Binding NavigateToOrderViewCommand}"/>
+            <Button Content="Orders"
+                    Command="{Binding NavigateToOrderViewCommand}"
+                    x:Name="OpenOrderView"
+                    Margin="5,0,5,20"
+                    Style="{StaticResource MenuButtonTheme }">
+            </Button>
+
+            <Button Content="Close"
+                    Command="{Binding NavigateToOrderViewCommand}"
+                    x:Name="CloseApp"
+                    Margin="5,0,5,20"
+                    Style="{StaticResource MenuButtonTheme}">
+            </Button>
+
+        </StackPanel>
+
+
 
         <ContentControl Grid.Column="1"
                         Content="{Binding Navigation.CurrentView}">
-            
+
         </ContentControl>
     </Grid>
 

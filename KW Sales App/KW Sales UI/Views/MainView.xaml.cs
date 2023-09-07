@@ -22,6 +22,7 @@ namespace KW_Sales_UI.Views
         public MainView()
         {
             InitializeComponent();
+            CloseApp.Click += delegate { this.Close(); };
         }
     }
 }
