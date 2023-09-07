@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLibrary
+namespace KW_Sales_UI.ViewModels
 {
-    internal interface IDataConnection
+    public class OrderViewModel : BaseViewModel
     {
     }
 }

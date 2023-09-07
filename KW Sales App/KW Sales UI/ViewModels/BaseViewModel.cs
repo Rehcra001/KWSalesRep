@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace KW_Sales_UI.ViewModels
 {
-    class MainViewModel : BaseViewModel
+    public class BaseViewModel : ObservableObject
     {
+
     }
 }
