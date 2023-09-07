@@ -132,6 +132,11 @@ CREATE TABLE dbo.Customers
 );
 GO
 
+--Non Unique, Non clustered
+CREATE INDEX IX_Customers_LastName
+ON dbo.Customers (LastName ASC);
+GO
+
 CREATE TABLE dbo.Orders
 (
 	OrderID INT IDENTITY(1, 1) PRIMARY KEY NOT NULL,
