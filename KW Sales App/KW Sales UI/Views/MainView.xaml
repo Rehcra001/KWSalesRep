@@ -7,6 +7,23 @@
         mc:Ignorable="d"
         Title="MainView" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Button Grid.Column="0"
+                Content="Orders"
+                Height="40"
+                VerticalAlignment="Top"
+                Margin="5"
+                FontSize="20"
+                Command="{Binding NavigateToOrderViewCommand}"/>
+
+        <ContentControl Grid.Column="1"
+                        Content="{Binding Navigation.CurrentView}">
+            
+        </ContentControl>
     </Grid>
+
 </Window>
