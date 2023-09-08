@@ -4,42 +4,291 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:KW_Sales_UI.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="550" d:DesignWidth="500"
+             mc:Ignorable="d" d:DesignWidth="500"
              Background="#272537"
              Foreground="White"
-             FontSize="16">
-    
+             FontSize="16" Height="641">
+
     <StackPanel Orientation="Vertical">
         <GroupBox Header="Order"
-                  Height="100"
+                  Height="Auto"
                   Margin="10, 5, 10, 5">
-            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Label Content="KIDware Order"
+                           Foreground="White"
+                           Grid.Column="0"
+                           Grid.Row="0"/>
+                    <TextBox Grid.Column="1"
+                             Grid.Row="0"
+                             Width="100"
+                             Margin="5"
+                             FontSize="12"
+                             HorizontalAlignment="Center"
+                             Style="{StaticResource TextBoxTheme}" Height="30"/>
+
+                    <Label Content="Order Date"
+                           Foreground="White"
+                           Grid.Column="0"
+                           Grid.Row="1"/>
+                    <TextBox Grid.Column="1"
+                             Grid.Row="1"
+                             Width="100"
+                             Margin="5"
+                             FontSize="12"
+                             HorizontalAlignment="Center"
+                             Style="{StaticResource TextBoxTheme}" Height="30"/>
+                </Grid>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Grid.Column="1">
+                    <Button Content="Submit"
+                            Width="100"
+                            Style="{StaticResource ButtonTheme}"/>
+                </StackPanel>
+
+            </Grid>
         </GroupBox>
 
         <GroupBox Header="Customers"
-          Height="250"
+          Height="Auto"
           Margin="10, 5, 10, 5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal"
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            Grid.ColumnSpan="2"
+                            HorizontalAlignment="Left">
+
+                    <ComboBox Margin="5"
+                              Width="200"
+                              Background="Transparent"
+                              ItemsSource="{Binding Customers}"
+                              SelectedItem="{Binding Customer}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock x:Name="fullName" Text="{Binding FullName}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <Button Content="New"
+                            Margin="5"
+                            Width="70"
+                            Style="{StaticResource ButtonTheme}"/>
+                    <Button Content="Save"
+                            Margin="5"
+                            Width="70"
+                            Style="{StaticResource ButtonTheme}"/>
+                    <Button Content="Cancel"
+                            Margin="5"
+                            Width="70"
+                            Style="{StaticResource ButtonTheme}"/>
+                </StackPanel>
+
+                <Label Content="First Name"
+                       Foreground="White"
+                       Grid.Column="0"
+                       Grid.Row="1"/>
+                <TextBox Grid.Column="1"
+                         Grid.Row="1"
+                         Width="325"
+                         Margin="5"
+                         FontSize="12"
+                         HorizontalAlignment="Left"
+                         Style="{StaticResource TextBoxRequiredTheme}" Height="30"/>
+
+                <Label Content="Last Name"
+                       Foreground="White"
+                       Grid.Column="0"
+                       Grid.Row="2"/>
+                <TextBox Grid.Column="1"
+                         Grid.Row="2"
+                         Width="325"
+                         Margin="5"
+                         FontSize="12"
+                         HorizontalAlignment="Left"
+                         Style="{StaticResource TextBoxRequiredTheme}" Height="30"/>
+
+                <Label Content="Address"
+                       Foreground="White"
+                       Grid.Column="0"
+                       Grid.Row="3"/>
+                <TextBox Grid.Column="1"
+                         Grid.Row="3"
+                         Width="325"
+                         Margin="5"
+                         FontSize="12"
+                         HorizontalAlignment="Left"
+                         Style="{StaticResource TextBoxRequiredTheme}" Height="30"/>
+
+                <Label Content="City"
+                       Foreground="White"
+                       Grid.Column="0"
+                       Grid.Row="4"/>
+                <TextBox Grid.Column="1"
+                         Grid.Row="4"
+                         Width="325"
+                         Margin="5"
+                         FontSize="12"
+                         HorizontalAlignment="Left"
+                         Style="{StaticResource TextBoxRequiredTheme}" Height="30"/>
+
+                <Label Content="State"
+                       Foreground="White"
+                       Grid.Column="0"
+                       Grid.Row="5"/>
+                <TextBox Grid.Column="1"
+                         Grid.Row="5"
+                         Width="150"
+                         Margin="5"
+                         FontSize="12"
+                         HorizontalAlignment="Left"
+                         Style="{StaticResource TextBoxRequiredTheme}" Height="30"/>
+
+                <Label Content="Zip"
+                       Foreground="White"
+                       Grid.Column="0"
+                       Grid.Row="6"/>
+                <TextBox Grid.Column="1"
+                         Grid.Row="6"
+                         Width="150"
+                         Margin="5"
+                         FontSize="12"
+                         HorizontalAlignment="Left"
+                         Style="{StaticResource TextBoxRequiredTheme}" Height="30"/>
+            </Grid>
+
 
         </GroupBox>
         <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Center">
+                    HorizontalAlignment="Center"
+                    Height="Auto">
             <GroupBox Header="Products"
-                      Height="150"
-                      Width="175"
+                      Height="Auto"
+                      Width="200"
                       Margin="10, 5, 10, 5"
                       HorizontalAlignment="Center">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <ComboBox ItemsSource="{Binding Products}"
+                              SelectedItem="{Binding Description}"
+                              Margin="5"
+                              Grid.Row="0">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock x:Name="productDescription" Text="{Binding Description}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
 
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0"
+                               Content="Total"
+                               Foreground="White"/>
+
+                        <TextBox Grid.Column="1"
+                                 Margin="5"
+                                 FontSize="12"
+                                 Style="{StaticResource TextBoxTheme}" Height="30"/>
+                    </Grid>
+                    
+                    <Button Grid.Row="2"
+                            Content="Add To Cart"
+                            Width="100"
+                            Style="{StaticResource ButtonTheme}"/>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0"
+                               Content="Quantity"
+                               Foreground="White"/>
+
+                        <TextBox Grid.Column="1"
+                                 Margin="5"
+                                 FontSize="12"
+                                 Style="{StaticResource TextBoxTheme}" Height="30"/>
+                    </Grid>
+                </Grid>
             </GroupBox>
-            
+
             <GroupBox Header="Shopping Cart"
-                      Height="150"
-                      Width="275"
+                      Height="Auto"
+                      Width="250"
                       Margin="10, 5, 10, 5"
                       HorizontalAlignment="Right">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
 
+                    <ListBox x:Name="shoppingCart"
+                             Grid.Row="0"
+                             Margin="5"
+                             ItemsSource="{Binding ShoppingCarts}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Quantity}"/>
+                                    <TextBlock Text="{Binding Description}"/>
+                                    <TextBlock Text="{Binding Price}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <Button Grid.Row="1"
+                            Content="Remove from Cart"
+                            Width="150"
+                            Style="{StaticResource ButtonTheme}"/>
+                </Grid>
             </GroupBox>
         </StackPanel>
-        
+
     </StackPanel>
 </UserControl>
