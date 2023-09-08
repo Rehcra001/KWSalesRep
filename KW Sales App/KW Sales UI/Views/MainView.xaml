@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KW_Sales_UI.Views"
         mc:Ignorable="d"
-        Title="MainView" Height="550" Width="600"
-        WindowStyle="None"
+        Title="KW Sales" Height="700" Width="610"
+        WindowStyle="SingleBorderWindow"
         ResizeMode="NoResize"
         Background="#272537"
         WindowStartupLocation="CenterScreen"
@@ -26,6 +26,7 @@
                     Command="{Binding NavigateToOrderViewCommand}"
                     x:Name="OpenOrderView"
                     Margin="5,0,5,20"
+                    HorizontalAlignment="Center"
                     Style="{StaticResource MenuButtonTheme }">
             </Button>
 
@@ -33,6 +34,8 @@
                     Command="{Binding NavigateToOrderViewCommand}"
                     x:Name="CloseApp"
                     Margin="5,0,5,20"
+                    HorizontalAlignment="Center"
+                    Width="100"
                     Style="{StaticResource MenuButtonTheme}">
             </Button>
 
