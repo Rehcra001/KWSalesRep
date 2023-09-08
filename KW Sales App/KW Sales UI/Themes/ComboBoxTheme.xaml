@@ -1,0 +1,23 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="{x:Type ComboBox}"
+           x:Key="ComboBoxTheme">
+        <Setter Property="Background" Value="#333333"/>
+        <Setter Property="Foreground" Value="#CFCFCF"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBox">
+                    
+                        <ComboBox>
+                        <Border Height="25"
+                                CornerRadius="12"
+                                Background="{TemplateBinding Background}">
+                        </Border>
+                    </ComboBox>
+                    
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>
