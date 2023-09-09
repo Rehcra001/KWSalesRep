@@ -8,8 +8,8 @@ namespace DataAccessLibrary.Models
 {
     public interface ICustomerRepository
     {
-        public string ConnectionString { get; set; }
-        CustomerModel Insert(CustomerModel customer);
-
+        string ConnectionString { get; set; }
+        (CustomerModel, string) Insert(CustomerModel customer);
+        (IEnumerable<CustomerModel>, string) GetAll();
     }
 }
