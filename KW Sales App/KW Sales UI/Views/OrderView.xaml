@@ -93,7 +93,8 @@
                               Background="Transparent"
                               ItemsSource="{Binding Customers}"
                               SelectedItem="{Binding Customer}"
-                              SelectedIndex="{Binding CustomersIndex}">
+                              SelectedIndex="{Binding CustomersIndex}"
+                              IsEnabled="{Binding CanAddCustomer}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -106,15 +107,18 @@
                     <Button Content="New"
                             Margin="5"
                             Width="70"
-                            Style="{StaticResource ButtonTheme}"/>
+                            Style="{StaticResource ButtonTheme}"
+                            Command="{Binding AddNewCustomerCommand}"/>
                     <Button Content="Save"
                             Margin="5"
                             Width="70"
-                            Style="{StaticResource ButtonTheme}"/>
+                            Style="{StaticResource ButtonTheme}"
+                            Command="{Binding SaveNewCustomerCommand}"/>
                     <Button Content="Cancel"
                             Margin="5"
                             Width="70"
-                            Style="{StaticResource ButtonTheme}"/>
+                            Style="{StaticResource ButtonTheme}"
+                            Command="{Binding CancelNewCustomerCommand}"/>
                 </StackPanel>
 
                 <Label Content="First Name"
