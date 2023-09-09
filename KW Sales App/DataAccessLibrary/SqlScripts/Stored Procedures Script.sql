@@ -34,3 +34,18 @@ BEGIN
 	END CATCH;
 END;
 GO
+
+ALTER PROCEDURE dbo.usp_GetAllCustomers AS
+BEGIN
+	BEGIN TRY
+		SET NOCOUNT ON;
+
+		SELECT CustomerID, FirstName, LastName, Address, City, State, Zip
+		FROM dbo.Customers;
+	END TRY
+
+	BEGIN CATCH
+		SELECT ERROR_MESSAGE() AS Message;
+	END CATCH;
+END;
+GO
