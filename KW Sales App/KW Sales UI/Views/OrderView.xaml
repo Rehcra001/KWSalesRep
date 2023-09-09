@@ -92,7 +92,8 @@
                               Width="200"
                               Background="Transparent"
                               ItemsSource="{Binding Customers}"
-                              SelectedItem="{Binding Customer}">
+                              SelectedItem="{Binding Customer}"
+                              SelectedIndex="{Binding CustomersIndex}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -126,6 +127,7 @@
                          Margin="5"
                          FontSize="12"
                          HorizontalAlignment="Left"
+                         Text="{Binding Customer.FirstName}"
                          Style="{StaticResource TextBoxRequiredTheme}" Height="30"/>
 
                 <Label Content="Last Name"
@@ -138,6 +140,7 @@
                          Margin="5"
                          FontSize="12"
                          HorizontalAlignment="Left"
+                         Text="{Binding Customer.LastName}"
                          Style="{StaticResource TextBoxRequiredTheme}" Height="30"/>
 
                 <Label Content="Address"
@@ -150,6 +153,7 @@
                          Margin="5"
                          FontSize="12"
                          HorizontalAlignment="Left"
+                         Text="{Binding Customer.Address}"
                          Style="{StaticResource TextBoxRequiredTheme}" Height="30"/>
 
                 <Label Content="City"
@@ -162,6 +166,7 @@
                          Margin="5"
                          FontSize="12"
                          HorizontalAlignment="Left"
+                         Text="{Binding Customer.City}"
                          Style="{StaticResource TextBoxRequiredTheme}" Height="30"/>
 
                 <Label Content="State"
@@ -174,6 +179,7 @@
                          Margin="5"
                          FontSize="12"
                          HorizontalAlignment="Left"
+                         Text="{Binding Customer.State}"
                          Style="{StaticResource TextBoxRequiredTheme}" Height="30"/>
 
                 <Label Content="Zip"
@@ -186,6 +192,7 @@
                          Margin="5"
                          FontSize="12"
                          HorizontalAlignment="Left"
+                         Text="{Binding Customer.Zip}"
                          Style="{StaticResource TextBoxRequiredTheme}" Height="30"/>
             </Grid>
 
