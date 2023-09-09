@@ -31,6 +31,7 @@ namespace KW_Sales_UI
             services.AddTransient<OrderViewModel>();
 
             services.AddSingleton<INavigationService, NavigationService>();
+            services.AddSingleton<IDataConnectionStringService, DataConnectionStringService>();
 
             services.AddSingleton<Func<Type, BaseViewModel>>(ServiceProvider => viewModelType => (BaseViewModel)ServiceProvider.GetRequiredService(viewModelType));
 
