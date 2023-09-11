@@ -9,6 +9,8 @@ using DataAccessLibrary.Models;
 using System.CodeDom.Compiler;
 using System.Windows;
 using KW_Sales_UI.Commands;
+using System.Collections.Specialized;
+using System.Collections.ObjectModel;
 
 namespace KW_Sales_UI.ViewModels
 {
@@ -65,9 +67,9 @@ namespace KW_Sales_UI.ViewModels
 			}
 		}
 
-		private List<CustomerModel> _customers;
+		private ObservableCollection<CustomerModel> _customers;
 
-		public List<CustomerModel> Customers
+		public ObservableCollection<CustomerModel> Customers
 		{
 			get { return _customers; }
 			set 
@@ -91,7 +93,7 @@ namespace KW_Sales_UI.ViewModels
 
 		private bool _canAddCustomer;
 
-		public bool CanAddCustomer
+        public bool CanAddCustomer
 		{
 			get { return _canAddCustomer; }
 			set 
@@ -100,6 +102,19 @@ namespace KW_Sales_UI.ViewModels
 				OnPropertyChanged("CanAddCustomer");
 			}
 		}
+
+		private bool _readOnly;
+
+		public bool ReadOnly
+		{
+			get { return _readOnly; }
+			set 
+			{ 
+				_readOnly = value;
+				OnPropertyChanged(nameof(ReadOnly));
+			}
+		}
+
 
 
 		public RelayCommand AddNewCustomerCommand { get; set; }
@@ -122,10 +137,11 @@ namespace KW_Sales_UI.ViewModels
 			CancelNewCustomerCommand = new RelayCommand(CancelNewCustomer, CanCancelNewCustomer);
 
 			//Load all Customers
-            Tuple<IEnumerable<CustomerModel>, string> tuple = CustomerRepository.GetAll().ToTuple();
+            Tuple<ObservableCollection<CustomerModel>, string> tuple = CustomerRepository.GetAll().ToTuple();
 			if (tuple.Item1 != null)
 			{
-                Customers = tuple.Item1.ToList();
+                Customers = tuple.Item1;
+				
             }
 			else
 			{
@@ -161,7 +177,33 @@ namespace KW_Sales_UI.ViewModels
 
         private void SaveNewCustomer(object obj)
         {
-            throw new NotImplementedException();
+			if (_state.Equals("Add"))
+			{
+				if (ValidateCustomer())
+				{
+					//Save new customer
+					Tuple<CustomerModel, string> tuple = _customerRepository!.Insert(Customer).ToTuple();
+					if (tuple.Item2 == null)
+					{
+						//Save successful overwrite CustomerID
+						Customers[CustomersIndex] = tuple.Item1;
+                        CustomersIndex = Customers.Count - 1;
+                    }
+					else
+					{
+                        //Error saving
+                        _errorMessage = tuple.Item2;
+                        MessageBox.Show("Unable to save the customer!\r\n\r\n" + _errorMessage,
+                                        "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+				}
+				else
+				{
+					return;
+				}
+				SetState("View");
+			}
         }
 
         private bool CanAddNewCustomer(object obj)
@@ -184,11 +226,68 @@ namespace KW_Sales_UI.ViewModels
 			{
 				case "View":
                     CanAddCustomer = true;
+					ReadOnly = true;
 					break;
 				default:
                     CanAddCustomer = false;
+					ReadOnly = false;
 					break;
 			}
+		}
+
+		private bool ValidateCustomer()
+		{
+			bool isValid = true;
+			string errorMessage = "";
+
+			//First name validation
+			if (string.IsNullOrWhiteSpace(Customer.FirstName))
+			{
+				errorMessage += "First name is required.\r\n";
+				isValid = false;
+			}
+
+			//Last name validation
+			if (string.IsNullOrWhiteSpace(Customer.LastName))
+			{
+                errorMessage += "Last name is required.\r\n";
+                isValid = false;
+            }
+
+            //Last name validation
+            if (string.IsNullOrWhiteSpace(Customer.Address))
+            {
+                errorMessage += "Address is required.\r\n";
+                isValid = false;
+            }
+
+            //Last name validation
+            if (string.IsNullOrWhiteSpace(Customer.City))
+            {
+                errorMessage += "City is required.\r\n";
+                isValid = false;
+            }
+
+            //Last name validation
+            if (string.IsNullOrWhiteSpace(Customer.State))
+            {
+                errorMessage += "State is required.\r\n";
+                isValid = false;
+            }
+
+            //Last name validation
+            if (string.IsNullOrWhiteSpace(Customer.Zip))
+            {
+                errorMessage += "Zip is required.\r\n";
+                isValid = false;
+            }
+
+            //Show any validation errors
+            if (!isValid)
+			{
+				MessageBox.Show(errorMessage, "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
+			return isValid;
 		}
     }
 }
