@@ -49,3 +49,19 @@ BEGIN
 	END CATCH;
 END;
 GO
+
+--**************Product Stored Procedures
+ALTER PROCEDURE dbo.usp_GetAllProducts AS
+BEGIN
+	BEGIN TRY
+		SET NOCOUNT ON;
+
+		SELECT ProductID, Description, Price, NumberSold
+		FROM dbo.Products;
+	END TRY
+
+	BEGIN CATCH
+		SELECT ERROR_MESSAGE() AS Message;
+	END CATCH;
+END;
+GO
