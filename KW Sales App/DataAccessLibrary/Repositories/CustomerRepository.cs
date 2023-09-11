@@ -1,6 +1,7 @@
 ﻿using DataAccessLibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -59,9 +60,9 @@ namespace DataAccessLibrary.Repositories
             return (customer, returnMessage);
         }
 
-        public (IEnumerable<CustomerModel>, string) GetAll()
+        public (ObservableCollection<CustomerModel>, string) GetAll()
         {
-            List<CustomerModel> customers = new List<CustomerModel>();
+            ObservableCollection<CustomerModel> customers = new ObservableCollection<CustomerModel>();
             string? errorMessage = null;
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
