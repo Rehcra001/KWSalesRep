@@ -98,7 +98,7 @@
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock x:Name="fullName" Text="{Binding FullName}"/>
+                                    <TextBlock Text="{Binding FullName}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
@@ -132,6 +132,7 @@
                          FontSize="12"
                          HorizontalAlignment="Left"
                          Text="{Binding Customer.FirstName}"
+                         IsReadOnly="{Binding ReadOnly}"
                          Style="{StaticResource TextBoxRequiredTheme}" Height="30"/>
 
                 <Label Content="Last Name"
@@ -145,6 +146,7 @@
                          FontSize="12"
                          HorizontalAlignment="Left"
                          Text="{Binding Customer.LastName}"
+                         IsReadOnly="{Binding ReadOnly}"
                          Style="{StaticResource TextBoxRequiredTheme}" Height="30"/>
 
                 <Label Content="Address"
@@ -158,6 +160,7 @@
                          FontSize="12"
                          HorizontalAlignment="Left"
                          Text="{Binding Customer.Address}"
+                         IsReadOnly="{Binding ReadOnly}"
                          Style="{StaticResource TextBoxRequiredTheme}" Height="30"/>
 
                 <Label Content="City"
@@ -171,6 +174,7 @@
                          FontSize="12"
                          HorizontalAlignment="Left"
                          Text="{Binding Customer.City}"
+                         IsReadOnly="{Binding ReadOnly}"
                          Style="{StaticResource TextBoxRequiredTheme}" Height="30"/>
 
                 <Label Content="State"
@@ -197,6 +201,7 @@
                          FontSize="12"
                          HorizontalAlignment="Left"
                          Text="{Binding Customer.Zip}"
+                         IsReadOnly="{Binding ReadOnly}"
                          Style="{StaticResource TextBoxRequiredTheme}" Height="30"/>
             </Grid>
 
