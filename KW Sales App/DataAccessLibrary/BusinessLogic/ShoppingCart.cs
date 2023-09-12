@@ -2,13 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccessLibrary.BusinessLogic
 {
-    public class ShoppingCart : IShoppingCart
+    public class ShoppingCart : IShoppingCart, INotifyPropertyChanged
     {
         private decimal _total;
         private Dictionary<ProductModel, int> _products;
@@ -21,9 +22,16 @@ namespace DataAccessLibrary.BusinessLogic
             Total = 0;
         }
 
-        public decimal Total { get => _total; set => _total = value; }
+        public decimal Total { get => _total; set => _total = value;}
         public Dictionary<ProductModel, int> Products { get => _products; set => _products = value; }
         public ObservableCollection<string> ProductDescriptions { get => _productDescriptions; set => _productDescriptions = value; }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public void AddToCart(ProductModel product, int quantity)
         {
@@ -31,8 +39,7 @@ namespace DataAccessLibrary.BusinessLogic
             if (Products.ContainsKey(product))
             {
                 //Exists just update quantity
-                Products[product] += quantity;
-                
+                Products[product] += quantity;                
             }
             else
             {
@@ -64,15 +71,27 @@ namespace DataAccessLibrary.BusinessLogic
             else
             {
                 Total = 0;
-            }
-            
+            }            
         }
 
-        public void RemoveFromCart(ProductModel product)
+        /// <summary>
+        /// Removes a product from the shopping cart
+        /// </summary>
+        /// <param name="productDescription">
+        /// Takes in a product description for parsing
+        /// </param>
+        public void RemoveFromCart(string productDescription)
         {
-            if (Products.ContainsKey(product))
+            //Parse description to extract the product
+            string[] words = productDescription.Split('-');
+
+            foreach (KeyValuePair<ProductModel, int> item in Products)
             {
-                Products.Remove(product);
+                if (item.Key.Description!.Equals(words[1].Trim()))
+                {
+                    Products.Remove(item.Key);
+                    break;
+                }
             }
             //Recalc total
             CalculateTotal();

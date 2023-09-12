@@ -24,7 +24,7 @@ namespace DataAccessLibrary.BusinessLogic
 
         void AddToCart(ProductModel product, int quantity);
 
-        void RemoveFromCart(ProductModel product);
+        void RemoveFromCart(string productDescription);
 
         void CalculateTotal();
     }

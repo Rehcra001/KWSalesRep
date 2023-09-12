@@ -201,6 +201,7 @@ namespace KW_Sales_UI.ViewModels
         public RelayCommand SaveNewCustomerCommand { get; set; }
         public RelayCommand CancelNewCustomerCommand { get; set; }
         public RelayCommand AddToShoppingCartCommand { get; set; }
+        public RelayCommand RemoveFromShoppingCartCommand { get; set; }
 
         #endregion properties
 
@@ -216,6 +217,7 @@ namespace KW_Sales_UI.ViewModels
             SaveNewCustomerCommand = new RelayCommand(SaveNewCustomer, CanSaveNewCustomer);
             CancelNewCustomerCommand = new RelayCommand(CancelNewCustomer, CanCancelNewCustomer);
             AddToShoppingCartCommand = new RelayCommand(AddToShoppingCart, CanAddToShoppingCart);
+            RemoveFromShoppingCartCommand = new RelayCommand(RemoveFromShoppingCart, CanRemoveFromShoppingCart);
 
             //Load all Customers
             Tuple<ObservableCollection<CustomerModel>, string> cust = CustomerRepository.GetAll().ToTuple();
@@ -246,8 +248,27 @@ namespace KW_Sales_UI.ViewModels
             }
 
             ShoppingCart = new ShoppingCart();
+            ShoppingCartProducts = ShoppingCart.ProductDescriptions;            
 
             SetState("View");
+        }
+
+        private bool CanRemoveFromShoppingCart(object obj)
+        {
+            return ShoppingCartProducts.Count > 0;
+        }
+
+        private void RemoveFromShoppingCart(object obj)
+        {
+            if (obj != null)
+            {
+                ShoppingCart.RemoveFromCart((string)obj);
+                ShoppingCartValue = ShoppingCart.Total;
+            }
+            else
+            {
+                MessageBox.Show("Please select an item to remove", "Remove Item", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
         }
 
         private bool CanAddToShoppingCart(object obj)
@@ -260,7 +281,6 @@ namespace KW_Sales_UI.ViewModels
             if (ProductQuantity > 0)
             {
                 ShoppingCart.AddToCart(Product, ProductQuantity);
-                ShoppingCartProducts = ShoppingCart.ProductDescriptions;
                 ShoppingCartValue = ShoppingCart.Total;
             }
             else

@@ -295,6 +295,8 @@
                     <Button Grid.Row="1"
                             Content="Remove from Cart"
                             Width="150"
+                            Command="{Binding RemoveFromShoppingCartCommand}"
+                            CommandParameter="{Binding ElementName=shoppingCart, Path=SelectedItem}"
                             Style="{StaticResource ButtonTheme}"/>
                 </Grid>
             </GroupBox>
