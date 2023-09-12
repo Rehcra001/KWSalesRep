@@ -40,6 +40,8 @@
                              Margin="5"
                              FontSize="12"
                              HorizontalAlignment="Center"
+                             Text="{Binding OrderID}"
+                             IsReadOnly="True"
                              Style="{StaticResource TextBoxTheme}" Height="30"/>
 
                     <Label Content="Order Date"
@@ -52,6 +54,8 @@
                              Margin="5"
                              FontSize="12"
                              HorizontalAlignment="Center"
+                             Text="{Binding CurrentDate, Mode=OneTime, StringFormat=dd/MM/yyyy}"
+                             IsReadOnly="True"
                              Style="{StaticResource TextBoxTheme}" Height="30"/>
                 </Grid>
                 <StackPanel Orientation="Horizontal"
@@ -59,6 +63,7 @@
                             Grid.Column="1">
                     <Button Content="Submit"
                             Width="100"
+                            Command="{Binding SubmitNewOrderCommand}"
                             Style="{StaticResource ButtonTheme}"/>
                 </StackPanel>
 

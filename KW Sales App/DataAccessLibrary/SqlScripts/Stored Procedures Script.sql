@@ -50,7 +50,7 @@ BEGIN
 END;
 GO
 
---**************Product Stored Procedures
+--**************Product Stored Procedures***************
 ALTER PROCEDURE dbo.usp_GetAllProducts AS
 BEGIN
 	BEGIN TRY
@@ -61,6 +61,90 @@ BEGIN
 	END TRY
 
 	BEGIN CATCH
+		SELECT ERROR_MESSAGE() AS Message;
+	END CATCH;
+END;
+GO
+
+ALTER PROCEDURE dbo.usp_UpdateTotalProductSold
+(
+	@ProductID INT,
+	@NumberSold INT
+)AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRAN
+			SET NOCOUNT ON;
+
+			UPDATE dbo.Products
+			SET NumberSold += @NumberSold
+			WHERE ProductID = @ProductID;
+		COMMIT TRAN;
+	END TRY
+
+	BEGIN CATCH
+		IF (@@TRANCOUNT > 0)
+		BEGIN
+			ROLLBACK TRAN;
+		END;
+		SELECT ERROR_MESSAGE() AS Message;
+	END CATCH;
+END;
+GO
+
+--***************Order Stored Procedures************
+ALTER PROCEDURE dbo.usp_AddNewOrder
+(
+	@CustomerID INT,
+	@OrderDate DATETIME
+)AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRAN
+			SET NOCOUNT ON;
+
+			INSERT INTO dbo.Orders (CustomerID, OrderDate)
+			VALUES (@CustomerID, @OrderDate);
+
+			SELECT SCOPE_IDENTITY() AS NewID;
+		COMMIT TRAN
+	END TRY
+
+	BEGIN CATCH
+		IF (@@TRANCOUNT > 0)
+		BEGIN
+			ROLLBACK TRAN
+		END;
+		SELECT ERROR_MESSAGE() AS Message;
+	END CATCH;
+END;
+GO
+
+--**********Purchases Stored Procedures****************
+ALTER PROCEDURE dbo.usp_AddNewPurchase
+(
+	@OrderID INT,
+	@ProductID INT,
+	@Quantity INT,
+	@Price MONEY
+)AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRAN
+			SET NOCOUNT ON;
+
+			INSERT INTO dbo.Purchases (OrderID, ProductID, Quantity, Price)
+			VALUES (@OrderID, @ProductID, @Quantity, @Price);
+
+			SELECT 'No Error' AS Message;
+		COMMIT TRAN
+	END TRY
+
+	BEGIN CATCH
+		IF (@@TRANCOUNT > 0)
+		BEGIN
+			ROLLBACK TRAN
+		END;
 		SELECT ERROR_MESSAGE() AS Message;
 	END CATCH;
 END;

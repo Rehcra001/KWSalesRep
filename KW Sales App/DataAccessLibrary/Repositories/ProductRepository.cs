@@ -60,5 +60,28 @@ namespace DataAccessLibrary.Repositories
 
             return (products, errorMessage);
         }
+
+        public string UpdateTotalQuantitySold(int productID, int quantity)
+        {
+            string? errorMessage = null;
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "dbo.usp_UpdateTotalProductSold";
+                    command.Parameters.AddWithValue("@ProductID", productID);
+                    command.Parameters.AddWithValue("@NumberSold", quantity);
+                    connection.Open();
+                    string returnMessage = command.ExecuteScalar().ToString()!;
+                    if (!returnMessage.Equals("No Error"))
+                    {
+                        errorMessage = returnMessage;
+                    }
+                }
+            }
+            return errorMessage;
+        }
     }
 }

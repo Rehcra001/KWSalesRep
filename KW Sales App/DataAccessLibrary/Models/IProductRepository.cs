@@ -11,5 +11,6 @@ namespace DataAccessLibrary.Models
     {
         string ConnectionString { get; set; }
         (ObservableCollection<ProductModel>, string) GetAll();
+        string UpdateTotalQuantitySold(int productID, int quantity);
     }
 }

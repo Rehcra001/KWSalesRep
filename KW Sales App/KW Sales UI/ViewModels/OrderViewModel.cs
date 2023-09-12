@@ -197,11 +197,34 @@ namespace KW_Sales_UI.ViewModels
         }
 
 
+        private DateTime _currentDate;
+
+        public DateTime CurrentDate
+        {
+            get { return _currentDate; }
+            private set { _currentDate = value; }
+        }
+
+        private int _orderID;
+
+        public int OrderID
+        {
+            get { return _orderID; }
+            set 
+            { 
+                _orderID = value;
+                OnPropertyChanged("OrderID");
+            }
+        }
+
+
+
         public RelayCommand AddNewCustomerCommand { get; set; }
         public RelayCommand SaveNewCustomerCommand { get; set; }
         public RelayCommand CancelNewCustomerCommand { get; set; }
         public RelayCommand AddToShoppingCartCommand { get; set; }
         public RelayCommand RemoveFromShoppingCartCommand { get; set; }
+        public RelayCommand SubmitNewOrderCommand { get; set; }
 
         #endregion properties
 
@@ -218,6 +241,10 @@ namespace KW_Sales_UI.ViewModels
             CancelNewCustomerCommand = new RelayCommand(CancelNewCustomer, CanCancelNewCustomer);
             AddToShoppingCartCommand = new RelayCommand(AddToShoppingCart, CanAddToShoppingCart);
             RemoveFromShoppingCartCommand = new RelayCommand(RemoveFromShoppingCart, CanRemoveFromShoppingCart);
+            SubmitNewOrderCommand = new RelayCommand(SubmitNewOrder, CanSubmitNewOrder);
+
+            //set current date
+            CurrentDate = DateTime.Now.Date;
 
             //Load all Customers
             Tuple<ObservableCollection<CustomerModel>, string> cust = CustomerRepository.GetAll().ToTuple();
@@ -253,9 +280,19 @@ namespace KW_Sales_UI.ViewModels
             SetState("View");
         }
 
+        private bool CanSubmitNewOrder(object obj)
+        {
+            return ShoppingCartProducts.Count > 0 && OrderID == 0;
+        }
+
+        private void SubmitNewOrder(object obj)
+        {
+            OrderID = new CreateNewOrder(DataConnection!.SqlConnectionString, ShoppingCart, Customer, CurrentDate).SaveOrder();
+        }
+
         private bool CanRemoveFromShoppingCart(object obj)
         {
-            return ShoppingCartProducts.Count > 0;
+            return ShoppingCartProducts.Count > 0; return ShoppingCartProducts.Count > 0;
         }
 
         private void RemoveFromShoppingCart(object obj)
