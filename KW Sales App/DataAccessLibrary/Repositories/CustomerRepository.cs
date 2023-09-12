@@ -77,7 +77,7 @@ namespace DataAccessLibrary.Repositories
                         DataTable dataTable = new DataTable();
                         adapter.SelectCommand = command;
                         adapter.Fill(dataTable);
-                        if (dataTable.Columns.Count > 1)
+                        if (dataTable.Columns.Count > 1) //Return data
                         {
                             foreach (DataRow row in dataTable.Rows)
                             {
@@ -93,7 +93,7 @@ namespace DataAccessLibrary.Repositories
                                 customers.Add(customer);
                             }
                         }
-                        else
+                        else //error returned
                         {                            
                             errorMessage = dataTable.Columns["Message"]!.ToString();
                         }
